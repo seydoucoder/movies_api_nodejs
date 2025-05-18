@@ -6,6 +6,7 @@ const addMovie = require("./controllers/addMovies");
 const mongose = require("mongoose");
 const getAllMovies = require("./controllers/getAllMovies");
 const getMovie = require("./controllers/getMovie");
+const editMovie = require("./controllers/editMovie");
 
 // Connexion à la base de données
 mongose.connect(process.env.mongo_connection, {})
@@ -28,6 +29,8 @@ require("./models/ModelFilms");
 app.post("/api/movies", addMovie);
 app.get("/api/movies", getAllMovies);
 app.get('/api/movies/:film_id', getMovie);
+app.patch('/api/movies',editMovie)
+//app.delete('/api/movies', deleteMovie);
 
 
 app.listen(8000, () => {
