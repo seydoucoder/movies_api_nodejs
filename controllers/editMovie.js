@@ -3,13 +3,17 @@ const mongoose = require("mongoose");
 const editMovie = async (req, res) => {
 
     const filmModel = mongoose.model("films");
-    const { film_id, nom_film, description, note } = req.body;
+    const { nom_film, description, note } = req.body;
+     const { film_id } = req.params;
 
     // Vérification id
     try {
-        if (!film_id) throw "L'id du film est requis !";
+        const getFilm = await filmModel.findOne({
+            _id: film_id
+        });
+        if (!getFilm) throw "Film non trouvé !";
     } catch (e) {
-        res.status(400).json({
+        res.status(404).json({
             status: "Error",
             message: e
         });
@@ -19,7 +23,7 @@ const editMovie = async (req, res) => {
    try {
      await filmModel.updateOne(
         {
-            _id:film_id,
+            _id: film_id
         },
         {
             nom_film: nom_film,

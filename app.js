@@ -30,7 +30,7 @@ require("./models/ModelFilms");
 app.post("/api/movies", addMovie);
 app.get("/api/movies", getAllMovies);
 app.get('/api/movies/:film_id', getMovie);
-app.patch('/api/movies',editMovie)
+app.patch('/api/movies/:film_id',editMovie)
 app.delete('/api/movies/:film_id', deleteMovie);
 
 
